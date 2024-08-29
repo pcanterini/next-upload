@@ -95,6 +95,8 @@ export default function FileUploader() {
         )}
       </div>
 
+      {uploadSuccess && 'Upload Successful!'}
+
       {files.length > 0 && (
         <div className="mt-8">
           <h2 className="text-lg font-semibold mb-4">Preview:</h2>
@@ -118,7 +120,6 @@ export default function FileUploader() {
           </div>
         </div>
       )}
-      {uploadSuccess && 'upload successful'}
       {files.length > 0 && (
         <div className="mt-8">
           <Button onClick={uploadToS3} disabled={uploading}>
