@@ -94,7 +94,9 @@ export default function FileUploader() {
           <p>Drag &apos;n&apos; drop some files here, or click to select files</p>
         )}
       </div>
+
       {uploadSuccess && 'Upload Successful!'}
+      
       {files.length > 0 && (
         <div className="mt-8">
           <h2 className="text-lg font-semibold mb-4">Preview:</h2>
