@@ -16,6 +16,7 @@ export default function FileUploader() {
   const [files, setFiles] = useState<FileWithPreview[]>([])
   const [uploading, setUploading] = useState(false)
   const [uploadProgress, setUploadProgress] = useState(0)
+  const [uploadSuccess, setUploadSucess] = useState(false)
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     setFiles(prevFiles => [
@@ -35,6 +36,7 @@ export default function FileUploader() {
 
   const uploadToS3 = async () => {
     setUploading(true)
+    setUploadSucess(false)
     setUploadProgress(0)
 
     const s3Config: S3ClientConfig = {
@@ -67,6 +69,7 @@ export default function FileUploader() {
 
       try {
         await upload.done()
+        setUploadSucess(true)
       } catch (error) {
         console.error('Error uploading file:', error)
       }
@@ -115,7 +118,7 @@ export default function FileUploader() {
           </div>
         </div>
       )}
-
+      {uploadSuccess && 'upload successful'}
       {files.length > 0 && (
         <div className="mt-8">
           <Button onClick={uploadToS3} disabled={uploading}>
